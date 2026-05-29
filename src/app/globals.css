@@ -1,0 +1,411 @@
+@import "tailwindcss";
+
+
+/* ============================================================
+   LENDING PORTAL — GLOBAL STYLES
+   Premium dark/light institutional financial UI
+   ============================================================ */
+
+/* ---- CSS Custom Properties --------------------------------- */
+:root {
+  /* Light Mode Tokens */
+  --bg-primary:       #FFFFFF;
+  --bg-secondary:     #F8F9FA;
+  --bg-tertiary:      #EEF2FF;
+  --bg-card:          #FFFFFF;
+  --bg-sidebar:       #F0F2F8;
+
+  --text-primary:     #0A0A0F;
+  --text-secondary:   #374151;
+  --text-muted:       #6B7280;
+  --text-inverse:     #FFFFFF;
+
+  --accent-primary:   #1E2B5F;   /* Deep navy */
+  --accent-secondary: #B8960C;   /* Gold */
+  --accent-emerald:   #059669;
+
+  --border-color:     #E5E7EB;
+  --border-accent:    rgba(30, 43, 95, 0.15);
+
+  --shadow-card:      0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-elevated:  0 8px 40px rgba(0,0,0,0.1);
+
+  --row-hover:        rgba(30, 43, 95, 0.04);
+  --scrollbar-thumb:  #CBD5E1;
+}
+
+.dark {
+  /* Dark Mode Tokens */
+  --bg-primary:       #0D0F1A;
+  --bg-secondary:     #121629;
+  --bg-tertiary:      #1A1F35;
+  --bg-card:          #141827;
+  --bg-sidebar:       #0A0C16;
+
+  --text-primary:     #F0F2F8;
+  --text-secondary:   #C8CEDB;
+  --text-muted:       #8892A4;
+  --text-inverse:     #0D0F1A;
+
+  --accent-primary:   #D4AF37;   /* Gold */
+  --accent-secondary: #10B981;   /* Emerald */
+  --accent-emerald:   #34D399;
+
+  --border-color:     rgba(255,255,255,0.06);
+  --border-accent:    rgba(212, 175, 55, 0.15);
+
+  --shadow-card:      0 4px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.2);
+  --shadow-elevated:  0 8px 40px rgba(0,0,0,0.5);
+
+  --row-hover:        rgba(212, 175, 55, 0.05);
+  --scrollbar-thumb:  #2A3048;
+}
+
+/* ---- Base Reset -------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
+/* ---- Scrollbars -------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+  opacity: 0.8;
+}
+
+/* ---- Focus Ring -------------------------------------------- */
+*:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Typography -------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-primary);
+  letter-spacing: -0.015em;
+}
+
+/* ---- Premium Card ----------------------------------------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-elevated);
+  border-color: var(--border-accent);
+}
+
+/* ---- Data Table ------------------------------------------- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.data-table thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.data-table thead th:hover {
+  color: var(--accent-primary);
+  background: var(--bg-tertiary);
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.15s ease, transform 0.15s ease;
+  cursor: default;
+}
+
+.data-table tbody tr:hover {
+  background: var(--row-hover);
+}
+
+.data-table tbody td {
+  padding: 0.875rem 1rem;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+/* ---- Accent Divider --------------------------------------- */
+.accent-divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-primary), transparent);
+  border-radius: 9999px;
+  opacity: 0.6;
+}
+
+/* ---- Skeleton Loader -------------------------------------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--bg-tertiary) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- Glass Panel ------------------------------------------ */
+.glass {
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dark .glass {
+  background: rgba(13, 15, 26, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.08);
+}
+
+/* ---- Drag-Drop Zone --------------------------------------- */
+.drop-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: 1rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.drop-zone.active,
+.drop-zone:hover {
+  border-color: var(--accent-primary);
+  background: var(--row-hover);
+}
+
+/* ---- Progress Bar ----------------------------------------- */
+.progress-track {
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  transition: width 0.3s ease;
+}
+
+/* ---- Status Badge ----------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badge-active    { background: rgba(16,185,129,0.12); color: #10B981; }
+.badge-inactive  { background: rgba(107,114,128,0.12); color: #6B7280; }
+.badge-stop      { background: rgba(239,68,68,0.12); color: #EF4444; }
+.badge-paid      { background: rgba(16,185,129,0.12); color: #10B981; }
+.badge-defaulted { background: rgba(239,68,68,0.12); color: #EF4444; }
+
+/* ---- Sidebar Animation ------------------------------------ */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-link:hover {
+  color: var(--text-primary);
+  background: var(--row-hover);
+  transform: translateX(2px);
+}
+
+.sidebar-link.active {
+  color: var(--accent-primary);
+  background: var(--row-hover);
+  font-weight: 600;
+}
+
+.sidebar-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent-primary);
+  border-radius: 0 9999px 9999px 0;
+}
+
+/* ---- Button Styles ---------------------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--accent-primary);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background: var(--row-hover);
+  transform: translateY(-1px);
+}
+
+/* ---- Input Styles ----------------------------------------- */
+.form-input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.625rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  background: var(--bg-card);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ---- Toast Notification ----------------------------------- */
+.toast {
+  padding: 0.875rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  box-shadow: var(--shadow-elevated);
+  animation: slideUp 0.3s ease-out;
+  backdrop-filter: blur(8px);
+}
+
+.toast-success {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: #10B981;
+}
+
+.toast-error {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: #EF4444;
+}
+
+.toast-info {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
